@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cualtos.proyecto</groupId>
+  <artifactId>Proyecto_final</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.akathist.maven.plugins.launch4j</groupId>
+        <artifactId>launch4j-maven-plugin</artifactId>
+        <version>2.4.1</version>
+        <executions>
+          <execution>
+            <id>l4j-clui</id>
+            <phase>package</phase>
+            <goals>
+              <goal>launch4j</goal>
+            </goals>
+            <configuration>
+              <headerType>gui</headerType>
+              <outfile>${project.build.directory}/SongsWorld.exe</outfile>
+              <jar>${project.build.directory}/${project.artifactId}-${project.version}.jar</jar>
+              <dontWrapJar>false</dontWrapJar>
+              <errTitle>Error en la aplicación</errTitle>
+              <icon>src/main/resources/icons/logo.ico</icon>
+              <classPath>
+                <mainClass>cualtos.proyecto.Main</mainClass>
+                <addDependencies>true</addDependencies>
+              </classPath>
+              <jre>
+                <path>%JAVA_HOME%</path>
+                <bundledJre64Bit>false</bundledJre64Bit>
+                <bundledJreAsFallback>false</bundledJreAsFallback>
+                <minVersion>17.0.0</minVersion>
+                <jdkPreference>preferJre</jdkPreference>
+                <runtimeBits>64/32</runtimeBits>
+              </jre>
+              <versionInfo>
+                <fileVersion>1.0.0.0</fileVersion>
+                <txtFileVersion>${project.version}</txtFileVersion>
+                <fileDescription>Gestor de Música SongsWorld</fileDescription>
+                <copyright>Copyright © 2024</copyright>
+                <productVersion>1.0.0.0</productVersion>
+                <txtProductVersion>${project.version}</txtProductVersion>
+                <productName>SongsWorld</productName>
+                <internalName>SongsWorld</internalName>
+                <originalFilename>SongsWorld.exe</originalFilename>
+              </versionInfo>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.5.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer>
+                  <mainClass>cualtos.proyecto.Main</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <encoding>UTF-8</encoding>
+          <docencoding>UTF-8</docencoding>
+          <charset>UTF-8</charset>
+          <additionalOptions>-tag "author:a:Autor:" -tag "version:a:Versión:" -tag "since:a:Desde:"</additionalOptions>
+          <windowtitle>Documentación SongsWorld</windowtitle>
+          <doctitle>&lt;h1&gt;SongsWorld - Documentación API&lt;/h1&gt;</doctitle>
+          <bottom>&lt;p&gt;&amp;copy; 2024 SongsWorld. Todos los derechos reservados.&lt;/p&gt;</bottom>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>23</maven.compiler.target>
+    <maven.compiler.source>23</maven.compiler.source>
+  </properties>
+</project>
